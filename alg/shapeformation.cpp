@@ -215,7 +215,7 @@ void ShapeFormationParticle::updateConstructionDir() {
       constructionDir = (constructionDir + 1) % 6;
     } else if (nbrAtLabel(constructionDir).turnSignal == 0) {
       constructionDir = (constructionDir + 2) % 6;
-      turnSignal = 1;
+      turnSignal =  1;
     } else if (nbrAtLabel(constructionDir).turnSignal == 1) {
       constructionDir = (constructionDir + 1) % 6;
       turnSignal = 0;

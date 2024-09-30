@@ -234,6 +234,17 @@ class ShapeFormationAlg : public Algorithm {
   void instantiate(const int numParticles = 200, const double holeProb = 0.2,
                    const QString mode = "h");
 };
+// New Shape Formation.
+class NewShapeFormationAlg : public Algorithm {
+  Q_OBJECT
+
+  public:
+  NewShapeFormationAlg();
+
+  public slots:
+  void instantiate(const int numParticles = 200, const double holeProb = 0.2,
+                   const QString mode = "h");
+};
 
 class AlgorithmList {
  public:

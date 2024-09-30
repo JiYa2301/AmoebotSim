@@ -20,6 +20,7 @@
 #include "alg/leaderelection.h"
 #include "alg/leaderelectionbyerosion.h"
 #include "alg/shapeformation.h"
+#include "alg/newshapeformation.h"
 
 Algorithm::Algorithm(QString name, QString signature)
     : _name(name),
@@ -400,6 +401,32 @@ void ShapeFormationAlg::instantiate(const int numParticles,
   }
 }
 
+NewShapeFormationAlg::NewShapeFormationAlg() :
+    Algorithm("New Shape Formation", "newshapeformation") {
+  addParameter("# Particles", "200");
+  addParameter("Hole Prob.", "0.2");
+  addParameter("Shape", "h");
+}
+
+void NewShapeFormationAlg::instantiate(const int numParticles,
+                                    const double holeProb, const QString mode) {
+  std::set<QString> set = NewShapeFormationSystem::getAcceptedModes();
+  if (numParticles <= 0) {
+    emit log("# particles must be > 0", true);
+  } else if (holeProb < 0 || holeProb > 1) {
+    emit log("holeProb in [0,1] required", true);
+  } else if (set.find(mode) == set.end()) {
+    QString accepted = "";
+    for(std::set<QString>::iterator it = set.begin(); it != set.end(); ++it) {
+      if (accepted != "") accepted = accepted + ", " + *it;
+      else accepted = *it;
+    }
+    emit log("only accepted modes are: " + accepted, true);
+  } else {
+    emit setSystem(std::make_shared<NewShapeFormationSystem>(numParticles,
+                                                          holeProb, mode));
+  }
+}
 AlgorithmList::AlgorithmList() {
   // Demo algorithms.
   _algorithms.push_back(new DiscoDemoAlg());
@@ -420,6 +447,7 @@ AlgorithmList::AlgorithmList() {
   _algorithms.push_back(new LeaderElectionAlg());
   _algorithms.push_back(new LeaderElectionByErosionAlg());
   _algorithms.push_back(new ShapeFormationAlg());
+  _algorithms.push_back(new NewShapeFormationAlg());
 }
 
 AlgorithmList::~AlgorithmList() {

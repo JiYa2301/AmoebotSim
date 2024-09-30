@@ -23,6 +23,7 @@ HEADERS += \
     alg/hexagonformation.h \
     alg/infobjcoating.h \
     alg/leaderelectionbyerosion.h \
+    alg/newshapeformation.h \
     alg/shapeformation.h \
     core/amoebotparticle.h \
     core/amoebotsystem.h \
@@ -59,6 +60,7 @@ SOURCES += \
     alg/hexagonformation.cpp \
     alg/infobjcoating.cpp \
     alg/leaderelectionbyerosion.cpp \
+    alg/newshapeformation.cpp \
     alg/shapeformation.cpp \
     core/amoebotparticle.cpp \
     core/amoebotsystem.cpp \

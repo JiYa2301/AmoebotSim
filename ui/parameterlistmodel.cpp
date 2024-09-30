@@ -129,6 +129,9 @@ void ParameterListModel::createSystem(QString algName) {
   } else if (signature == "shapeformation") {
     dynamic_cast<ShapeFormationAlg*>(alg)->
         instantiate(params[0].toInt(), params[1].toDouble(), params[2]);
+  } else if (signature == "newshapeformation") {
+    dynamic_cast<NewShapeFormationAlg*>(alg)->
+        instantiate(params[0].toInt(), params[1].toDouble(), params[2]);
   } else {
     Q_ASSERT(false);  // An unrecognized signature has been entered.
   }
